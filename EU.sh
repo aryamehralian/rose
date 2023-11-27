@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Update the apt package index and upgrade installed packages
+# Update and upgrade system
 apt-get update -y && sudo apt-get upgrade -y
 
 # Install the curl package
