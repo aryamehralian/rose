@@ -1,0 +1,6 @@
+Open XUI settings.
+
+Add 
+"sendThrough": "000.000.000.000",
+After 
+"protocol": "freedom".
