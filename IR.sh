@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Update and upgrade system
-apt-get update -y
-apt-get upgrade -y
+apt-get update -y && sudo apt-get upgrade -y
 
 # Enable IP forwarding
 sysctl net.ipv4.ip_forward=1
