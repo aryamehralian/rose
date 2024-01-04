@@ -13,7 +13,7 @@ for (let i = 0; i < objLength; i++) {
   const status = data.obj[i].enable;
   const time = data.obj[i].expiryTime;
   const port = data.obj[i].port;
-  const id = data.obj[i].settings.clients[0].id;
+  const id =  JSON.parse(data.obj[i].settings).clients[0].id;
 
   // Setting fetch request options
   const requestOptions = {
