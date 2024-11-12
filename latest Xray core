@@ -45,7 +45,7 @@ apt update
 apt install certbot
 
 # Obtain an SSL certificate using Certbot in standalone mode
-certbot certonly --standalone -d 3.aryamehralian.ir
+certbot certonly --standalone -d domain.com
 
 # Reload systemd to apply new service configurations
 systemctl daemon-reload
