@@ -1,0 +1,63 @@
+# Navigate to the /usr/local/bin/ directory
+cd /usr/local/bin/
+
+# Download the latest Xray core binary for Linux 64-bit
+wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+
+# Install unzip utility if not already installed
+apt install unzip
+
+# Extract the downloaded Xray zip file
+unzip Xray-linux-64.zip
+
+# Move the Xray binary to /usr/local/bin/ and make it executable
+mv xray /usr/local/bin/xray
+chmod +x /usr/local/bin/xray
+
+# Create a directory for Xray configuration files
+mkdir -p /usr/local/etc/xray/
+
+# Open the Xray configuration file for editing
+nano /usr/local/etc/xray/config.json
+
+# Create a systemd service file for Xray
+nano /etc/systemd/system/xray.service
+
+
+[Unit]
+Description=Xray Service
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/xray -config /usr/local/etc/xray/config.json
+Restart=on-failure
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target
+
+
+# Update package lists
+apt update
+
+# Install Certbot for SSL certificate management
+apt install certbot
+
+# Obtain an SSL certificate using Certbot in standalone mode
+certbot certonly --standalone -d 3.aryamehralian.ir
+
+# Reload systemd to apply new service configurations
+systemctl daemon-reload
+
+# Start the Xray service
+systemctl start xray
+
+# Enable Xray to start on boot
+systemctl enable xray
+
+# Check the status of the Xray service
+systemctl status xray
+
+# Allow HTTPS traffic on port 443 through the firewall
+ufw allow 443/tcp
